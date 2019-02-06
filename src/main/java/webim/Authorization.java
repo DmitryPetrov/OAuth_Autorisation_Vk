@@ -90,7 +90,7 @@ public class Authorization extends HttpServlet {
         if (friends != null) {
             int j = 1;
             for(Integer i: friends) {
-                session.setAttribute("friend" + j, i);
+                session.setAttribute("friend" + j, i.toString());
                 j++;
             }
         }
