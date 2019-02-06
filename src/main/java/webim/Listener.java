@@ -32,6 +32,16 @@ public class Listener extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
+        String session_id = (String) request.getParameter("session");
+        HttpSession session;
+        if (session_id != null) {
+            ServletContext context = getServletConfig().getServletContext();
+            session = (HttpSession) context.getAttribute(session_id);
+        } else {
+            return;
+        }
+        
+        
         String vkPesp = "";
         String vkURL = "\n<p>URL request: " + request.getRequestURL() + "?"
                 + request.getQueryString() + "</p>";
@@ -54,10 +64,10 @@ public class Listener extends HttpServlet {
         vkPesp += "<form method=\"get\"action=\"/Authorization\">"
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
 
-        ServletContext context = getServletConfig().getServletContext();
-        context.setAttribute("vkResponse", vkPesp);
-        context.setAttribute("OAuthCode", request.getParameter("code"));
-        context.setAttribute("vkURL", request.getParameter("vkURL"));
+        
+        session.setAttribute("vkResponse", vkPesp);
+        session.setAttribute("OAuthCode", request.getParameter("code"));
+        session.setAttribute("vkURL", request.getParameter("vkURL"));
 
         response.sendRedirect("/OAuthCode");
     }
