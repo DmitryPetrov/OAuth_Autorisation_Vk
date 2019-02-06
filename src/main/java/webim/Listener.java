@@ -80,13 +80,19 @@ public class Listener extends HttpServlet {
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
 
         ServletContext context = getServletConfig().getServletContext();
-        
+ /*       
         context.setAttribute("userSession", context.getAttribute("session"));
         context.setAttribute("vkSession", vkSession.getId());
         
         context.setAttribute("OAuthCode", request.getParameter("code"));
-        context.setAttribute("vkPesp", request.getParameter("vkPesp"));
+        context.setAttribute("vkPesp", request.getParameter("vkPesp"));*/
 
+        vkSession.setAttribute("userSession", context.getAttribute("session"));
+        vkSession.setAttribute("vkSession", vkSession.getId());
+        
+        vkSession.setAttribute("OAuthCode", request.getParameter("code"));
+        vkSession.setAttribute("vkURL", request.getParameter("vkURL"));
+        
         response.sendRedirect("/OAuthCode");
     }
 

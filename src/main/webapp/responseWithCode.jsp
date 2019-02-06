@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p><% out.println("code: " + (String) getServletContext().getAttribute("OAuthCode")); %></p>
-<p><% out.println("vkPesp: " + (String) getServletContext().getAttribute("vkPesp")); %></p>
-<p><% out.println("userSession: " + (String) getServletContext().getAttribute("userSession")); %></p>
-<p><% out.println("vkSession: " + (String) getServletContext().getAttribute("vkSession")); %></p>
+<p><% out.println("code: " + (String) request.getSession().getAttribute("OAuthCode")); %></p>
+<p><% out.println("vkPesp: " + (String) request.getSession().getAttribute("vkPesp")); %></p>
+<p><% out.println("userSession: " + (String) request.getSession().getAttribute("userSession")); %></p>
+<p><% out.println("vkSession: " + (String) request.getSession().getAttribute("vkSession")); %></p>
 </body>
 </html>
