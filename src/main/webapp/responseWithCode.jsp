@@ -8,8 +8,7 @@
 </head>
 <body>
 <p><% out.println("code: " + (String) request.getSession().getAttribute("OAuthCode")); %></p>
+<p><% out.println("access_token: " + (String) request.getSession().getAttribute("access_token")); %></p>
 <p><% out.println("vkPesp: " + (String) request.getSession().getAttribute("vkPesp")); %></p>
-<p><% out.println("userSession: " + (String) request.getSession().getAttribute("userSession")); %></p>
-<p><% out.println("vkSession: " + (String) request.getSession().getAttribute("vkSession")); %></p>
 </body>
 </html>

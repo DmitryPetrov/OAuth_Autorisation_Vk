@@ -42,44 +42,37 @@ public class Listener extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
 
         String vkPesp = "";
-
-        vkPesp += "\n<p>URL request: " + request.getRequestURL() + "?"
-                + request.getQueryString() + "</p>";
-
-        vkPesp += "<li>METHOD: " + request.getMethod() + "</li>";
-        vkPesp += "<li>Protocol: " + request.getProtocol() + "</li>";
-        vkPesp += "<li>Port: " + request.getLocalPort() + "</li>";
-        vkPesp += "<li>URL: " + request.getRequestURL() + "</li>";
-        vkPesp += "<li>URI: " + request.getRequestURI() + "</li>";
-        vkPesp += getHeaders(request);
-
-        vkPesp += "\n\n<p>Request parameters: " + request.getQueryString()
-                + "</p>";
-
         vkPesp += getParameters(request);
-
         vkPesp += "<form method=\"get\"action=\"/Authorization\">"
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
 
 
         HttpSession vkSession = request.getSession();
-        vkSession.setAttribute("OAuthCode", request.getParameter("code"));
+        vkSession.setAttribute("code", request.getParameter("code"));
+        vkSession.setAttribute("access_token", request.getParameter("access_token"));
         vkSession.setAttribute("vkPesp", vkPesp);
-        
+        response.sendRedirect("/Authorization");
         UserAuthResponse authResponse = null;
         
-        if ( request.getParameter("code") != null) {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        if (request.getParameter("code") != null) {
             
             TransportClient transportClient = HttpTransportClient.getInstance(); 
             VkApiClient vk = new VkApiClient(transportClient);
             
             int APP_ID = 6843248;
-            String CLIENT_SECRET = "friends";
+            String CLIENT_SECRET = "n6qiMy0lvv7DaUVxTXpe";
             String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
             String code = request.getParameter("code");
-            
-            
-            
+
             try {
                 authResponse = vk.oauth() 
                         .userAuthorizationCodeFlow(APP_ID, CLIENT_SECRET, REDIRECT_URI, code) 
