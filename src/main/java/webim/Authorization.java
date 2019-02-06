@@ -20,6 +20,7 @@ import com.vk.api.sdk.objects.UserAuthResponse;
 import com.vk.api.sdk.objects.friends.responses.GetResponse;
 import com.vk.api.sdk.queries.friends.FriendsGetMutualOrder;
 import com.vk.api.sdk.queries.friends.FriendsGetOrder;
+import com.vk.api.sdk.queries.users.UsersGetQuery;
 
 /**
  * Servlet implementation class Authorization
@@ -76,6 +77,26 @@ public class Authorization extends HttpServlet {
                     .execute();
             
             friends = getResponse.getItems();
+            
+            session.setAttribute("actor", actor.toString());
+            
+            
+            UsersGetQuery getResponse2;
+                    
+            if (friends != null) {
+                int j = 1;
+                for(Integer i: friends) {
+                    getResponse2 = (UsersGetQuery) vk.users().get(actor)
+                            .userIds(i.toString())
+                            .execute();
+                    
+                    session.setAttribute("friend" + j, getResponse2.toString());
+                    j++;
+                    
+                }
+            }
+
+            
         } catch (ApiException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -85,15 +106,7 @@ public class Authorization extends HttpServlet {
         } 
         
         
-        session.setAttribute("actor", actor.toString());
-        
-        if (friends != null) {
-            int j = 1;
-            for(Integer i: friends) {
-                session.setAttribute("friend" + j, i.toString());
-                j++;
-            }
-        }
+
         
         
         
