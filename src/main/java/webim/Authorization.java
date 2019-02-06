@@ -41,7 +41,7 @@ public class Authorization extends HttpServlet {
         VkApiClient vk = new VkApiClient(transportClient);
         
         int APP_ID = 6843248;
-        String CLIENT_SECRET = "n6qiMy0lvv7DaUVxTXpe";
+        String CLIENT_SECRET = "4ZOc9BOTt8FBUonu0jxe";
         String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
         String code = (String) session.getAttribute("code");
         
