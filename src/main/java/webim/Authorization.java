@@ -68,6 +68,9 @@ public class Authorization extends HttpServlet {
         } 
         
         UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
+        HttpSession vkSession = request.getSession();
+        vkSession.setAttribute("actor", actor.toString());
+        response.sendRedirect("/OAuthCode");
     }
 
     /**

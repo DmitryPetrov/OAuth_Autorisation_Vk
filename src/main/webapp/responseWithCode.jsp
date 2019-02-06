@@ -11,5 +11,6 @@
 <p><% out.println("access_token: " + (String) request.getSession().getAttribute("access_token")); %></p>
 <p><% out.println("vkPesp: " + (String) request.getSession().getAttribute("vkPesp")); %></p>
 <p><% out.println("vkUrl: " + (String) request.getSession().getAttribute("vkUrl")); %></p>
+<p><% out.println("actor: " + (String) request.getSession().getAttribute("actor")); %></p>
 </body>
 </html>
