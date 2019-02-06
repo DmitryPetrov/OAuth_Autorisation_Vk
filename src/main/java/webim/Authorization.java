@@ -86,11 +86,11 @@ public class Authorization extends HttpServlet {
             if (friends != null) {
                 int j = 1;
                 for(Integer i: friends) {
-                    getResponse2 = (UsersGetQuery) vk.users().get(actor)
+/*                    getResponse2 = (UsersGetQuery) vk.users().get(actor)
                             .userIds(i.toString())
-                            .execute();
+                            .execute();*/
                     
-                    session.setAttribute("friend" + j, getResponse2.toString());
+                    session.setAttribute("friend" + j, i.toString());
                     j++;
                     
                 }
