@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,9 +49,9 @@ public class Listener extends HttpServlet {
         vkPesp += (getParameters(request));
         
         HttpSession session = request.getSession();
-        session.setAttribute("resp", vkPesp);
+        session.setAttribute("OAuthCode", vkPesp);
 
-        response.sendRedirect("/webim/webim");
+        response.sendRedirect("/webim/OAuthCode");
     }
 
     /**

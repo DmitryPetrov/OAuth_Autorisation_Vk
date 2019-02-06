@@ -9,7 +9,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>WebimTest</servlet-name>
-		<url-pattern>/webim</url-pattern>
+		<url-pattern>/webim_req</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -19,6 +19,15 @@
 	<servlet-mapping>
 		<servlet-name>Listener</servlet-name>
 		<url-pattern>/listener</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OAuthCode</servlet-name>
+		<jsp-file>/responseWithCode.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OAuthCode</servlet-name>
+		<url-pattern>/OAuthCode</url-pattern>
 	</servlet-mapping>
 
 
