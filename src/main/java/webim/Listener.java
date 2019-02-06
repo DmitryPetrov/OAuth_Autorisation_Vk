@@ -81,11 +81,11 @@ public class Listener extends HttpServlet {
 
         ServletContext context = getServletConfig().getServletContext();
         
-        vkSession.setAttribute("userSession", context.getAttribute("session"));
-        vkSession.setAttribute("vkSession", vkSession.getId());
+        context.setAttribute("userSession", context.getAttribute("session"));
+        context.setAttribute("vkSession", vkSession.getId());
         
-        vkSession.setAttribute("OAuthCode", request.getParameter("code"));
-        vkSession.setAttribute("vkPesp", request.getParameter("vkPesp"));
+        context.setAttribute("OAuthCode", request.getParameter("code"));
+        context.setAttribute("vkPesp", request.getParameter("vkPesp"));
 
         response.sendRedirect("/OAuthCode");
     }
