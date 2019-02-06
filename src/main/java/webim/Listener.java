@@ -43,7 +43,7 @@ public class Listener extends HttpServlet {
 
         String vkPesp = "";
         vkPesp += getParameters(request);
-        vkPesp += "<form method=\"get\"action=\"/AcceptAccessToken\">"
+        vkPesp += "<form method=\"get\"action=\"/Authorization\">"
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
 
 
