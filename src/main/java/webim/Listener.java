@@ -43,7 +43,7 @@ public class Listener extends HttpServlet {
 
         String vkPesp = "";
         vkPesp += getParameters(request);
-        vkPesp += "<form method=\"get\"action=\"/Authorization\">"
+        vkPesp += "<form method=\"get\"action=\"/AcceptAccessToken\">"
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
 
 
@@ -53,6 +53,7 @@ public class Listener extends HttpServlet {
         vkSession.setAttribute("vkPesp", vkPesp);
         //response.sendRedirect("/Authorization");
         UserAuthResponse authResponse = null;
+        response.sendRedirect("/OAuthCode");
         
         
         
@@ -61,8 +62,7 @@ public class Listener extends HttpServlet {
         
         
         
-        
-        
+        /*
         if (request.getParameter("code") != null) {
             
             TransportClient transportClient = HttpTransportClient.getInstance(); 
@@ -70,7 +70,7 @@ public class Listener extends HttpServlet {
             
             int APP_ID = 6843248;
             String CLIENT_SECRET = "n6qiMy0lvv7DaUVxTXpe";
-            String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
+            String REDIRECT_URI = "https://webim-test1.herokuapp.com/AcceptAccessToken";
             String code = request.getParameter("code");
 
             try {
@@ -91,7 +91,7 @@ public class Listener extends HttpServlet {
         if( request.getParameter("access_token") != null) {
             UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
             response.sendRedirect("/OAuthCode");
-        }
+        }*/
     }
 
     /**

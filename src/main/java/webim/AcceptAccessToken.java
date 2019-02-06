@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.objects.UserAuthResponse;
@@ -31,8 +32,10 @@ public class AcceptAccessToken extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         
-        UserAuthResponse authResponse = null;
-        UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
+        HttpSession vkSession = request.getSession();
+        vkSession.setAttribute("code", request.getParameter("code"));
+        vkSession.setAttribute("access_token", request.getParameter("access_token"));
+        response.sendRedirect("/OAuthCode");
         
     }
 
