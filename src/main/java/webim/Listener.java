@@ -4,6 +4,7 @@ package webim;
 import java.io.IOException;
 import java.util.Enumeration;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,10 +54,10 @@ public class Listener extends HttpServlet {
         vkPesp += "<form method=\"get\"action=\"/Authorization\">"
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
 
-        HttpSession session = request.getSession();
-        session.setAttribute("vkResponse", vkPesp);
-        session.setAttribute("OAuthCode", request.getParameter("code"));
-        session.setAttribute("vkURL", request.getParameter("vkURL"));
+        ServletContext context = getServletConfig().getServletContext();
+        context.setAttribute("vkResponse", vkPesp);
+        context.setAttribute("OAuthCode", request.getParameter("code"));
+        context.setAttribute("vkURL", request.getParameter("vkURL"));
 
         response.sendRedirect("/OAuthCode");
     }
