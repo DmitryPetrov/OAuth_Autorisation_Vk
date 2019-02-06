@@ -92,8 +92,8 @@ public class Listener extends HttpServlet {
                 e.printStackTrace();
             } 
             
-            UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
-            response.sendRedirect("/OAuthCode");
+            //UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
+            //response.sendRedirect("/OAuthCode");
         } 
         if( request.getParameter("access_token") != null) {
             UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
