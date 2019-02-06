@@ -33,25 +33,28 @@ public class Listener extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         String vkPesp = "";
         
-        vkPesp += ("");
+        vkPesp += "\n<p>URL request: " + request.getRequestURL() + "?" + request.getQueryString() + "</p>";
         
-        vkPesp += ("\n<p>URL request: " + request.getRequestURL() + "?" + request.getQueryString() + "</p>");
+        vkPesp += "<li>METHOD: "+ request.getMethod() + "</li>";
+        vkPesp += "<li>Protocol: "+ request.getProtocol() + "</li>";
+        vkPesp += "<li>Port: "+ request.getLocalPort() + "</li>";
+        vkPesp += "<li>URL: "+ request.getRequestURL() + "</li>";
+        vkPesp += "<li>URI: "+ request.getRequestURI() + "</li>";
+        vkPesp += getHeaders(request);
         
-        vkPesp += ("<li>METHOD: "+ request.getMethod() + "</li>");
-        vkPesp += ("<li>Protocol: "+ request.getProtocol() + "</li>");
-        vkPesp += ("<li>Port: "+ request.getLocalPort() + "</li>");
-        vkPesp += ("<li>URL: "+ request.getRequestURL() + "</li>");
-        vkPesp += ("<li>URI: "+ request.getRequestURI() + "</li>");
-        vkPesp += (getHeaders(request));
+        vkPesp += "\n\n<p>Request parameters: " + request.getQueryString() + "</p>";
         
-        vkPesp += ("\n\n<p>Request parameters: " + request.getQueryString() + "</p>");
+        vkPesp += getParameters(request);
         
-        vkPesp += (getParameters(request));
+        vkPesp += "<form method=\"get\"action=\"/Authorization\">"
+                + "<input type=\"submit\" value=\"Submit\">"
+                + "</form>";
         
         HttpSession session = request.getSession();
-        session.setAttribute("OAuthCode", vkPesp);
-
-        response.sendRedirect("/webim/OAuthCode");
+        session.setAttribute("vkResponse", vkPesp);
+        session.setAttribute("OAuthCode", request.getParameter("code"));
+        
+        response.sendRedirect("/OAuthCode");
     }
 
     /**
