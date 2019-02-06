@@ -72,7 +72,7 @@ public class Authorization extends HttpServlet {
             GetResponse getResponse = vk.friends().get(actor)
                     .userId(actor.getId())
                     .count(10)
-                    .order(FriendsGetOrder.valueOf("random"))
+                    .order(FriendsGetOrder.HINTS)
                     .execute();
             
             friends = getResponse.getItems();
