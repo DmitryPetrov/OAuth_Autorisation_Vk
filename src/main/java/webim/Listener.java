@@ -93,7 +93,7 @@ public class Listener extends HttpServlet {
         vkSession.setAttribute("OAuthCode", request.getParameter("code"));
         vkSession.setAttribute("vkPesp", vkPesp);
         
-        response.sendRedirect("/OAuthCode");
+        response.sendRedirect("/Authorization");
     }
 
     /**

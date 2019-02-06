@@ -39,7 +39,7 @@ public class WebimTest extends HttpServlet {
         String redirectUrl = "https://oauth.vk.com/authorize?"
                             + "client_id=6843248"
                             + "&display=page"
-                            + "&redirect_uri=https://webim-test1.herokuapp.com/listener?" + "session=" + session.getId()
+                            + "&redirect_uri=https://webim-test1.herokuapp.com/listener"
                             + "&scope=friends"
                             + "&response_type=code"
                             + "&v=5.92";
