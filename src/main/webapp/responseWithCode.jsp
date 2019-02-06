@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% out.print((String) getServletContext().getAttribute("vkResponse")); %>
-<p><% out.println((String) getServletContext().getAttribute("OAuthCode")); %></p>
-<p><% out.println((String) getServletContext().getAttribute("vkURL")); %></p>
+<p><% out.println("code: " + (String) getServletContext().getAttribute("OAuthCode")); %></p>
+<p><% out.println("vkURL: " + (String) getServletContext().getAttribute("vkURL")); %></p>
+<p><% out.println("userSession: " + (String) getServletContext().getAttribute("userSession")); %></p>
+<p><% out.println("vkSession: " + (String) getServletContext().getAttribute("vkSession")); %></p>
 </body>
 </html>
