@@ -8,7 +8,7 @@
 </head>
 <body>
 <p><% out.println("code: " + (String) getServletContext().getAttribute("OAuthCode")); %></p>
-<p><% out.println("vkURL: " + (String) getServletContext().getAttribute("vkURL")); %></p>
+<p><% out.println("vkPesp: " + (String) getServletContext().getAttribute("vkPesp")); %></p>
 <p><% out.println("userSession: " + (String) getServletContext().getAttribute("userSession")); %></p>
 <p><% out.println("vkSession: " + (String) getServletContext().getAttribute("vkSession")); %></p>
 </body>

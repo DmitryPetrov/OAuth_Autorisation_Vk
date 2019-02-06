@@ -35,11 +35,10 @@ public class Listener extends HttpServlet {
         String session_id = (String) request.getParameter("session");
         HttpSession userSession;
         HttpSession vkSession = request.getSession();
-        //if (session_id != null) {
+/*        if (session_id != null) {
             ServletContext context = getServletConfig().getServletContext();
             userSession = (HttpSession) context.getAttribute(session_id);
             
-            //session.setAttribute("vkResponse", vkPesp);
             userSession.setAttribute("userSession", userSession.getId());
             userSession.setAttribute("vkSession", request.getSession().getId());
             
@@ -53,12 +52,12 @@ public class Listener extends HttpServlet {
             vkSession.setAttribute("vkURL", request.getParameter("vkURL"));
             
             response.sendRedirect("/OAuthCode");
-      //  } else {
+        } else {
             return;
-      //  }
+        }*/
         
         
-/*        String vkPesp = "";
+        String vkPesp = "";
         String vkURL = "\n<p>URL request: " + request.getRequestURL() + "?"
                 + request.getQueryString() + "</p>";
 
@@ -80,12 +79,15 @@ public class Listener extends HttpServlet {
         vkPesp += "<form method=\"get\"action=\"/Authorization\">"
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
 
+        ServletContext context = getServletConfig().getServletContext();
         
-        session.setAttribute("vkResponse", vkPesp);
-        session.setAttribute("OAuthCode", request.getParameter("code"));
-        session.setAttribute("vkURL", request.getParameter("vkURL"));
+        vkSession.setAttribute("userSession", context.getAttribute("session"));
+        vkSession.setAttribute("vkSession", vkSession.getId());
+        
+        vkSession.setAttribute("OAuthCode", request.getParameter("code"));
+        vkSession.setAttribute("vkPesp", request.getParameter("vkPesp"));
 
-        response.sendRedirect("/OAuthCode");*/
+        response.sendRedirect("/OAuthCode");
     }
 
     /**

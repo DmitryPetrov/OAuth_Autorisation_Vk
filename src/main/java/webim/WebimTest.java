@@ -33,7 +33,7 @@ public class WebimTest extends HttpServlet {
         
         HttpSession session = request.getSession();
         ServletContext context = getServletConfig().getServletContext();
-        context.setAttribute(session.getId(), session);
+        context.setAttribute("session", session.getId());
         
         
         String redirectUrl = "https://oauth.vk.com/authorize?"
