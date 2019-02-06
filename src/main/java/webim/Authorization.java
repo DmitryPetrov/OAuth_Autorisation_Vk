@@ -41,19 +41,19 @@ public class Authorization extends HttpServlet {
         VkApiClient vk = new VkApiClient(transportClient);
         
         int APP_ID = 6843248;
-        String CLIENT_SECRET = "47c9bab847c9bab847c9bab8f547a1d1c8447c947c9bab81b92f479659bb1889f857686";
+        String CLIENT_SECRET = "4ZOc9BOTt8FBUonu0jxe";
         String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
         String code = (String) session.getAttribute("code");
         
-        String redirectUrl = "https://oauth.vk.com/access_token?"
+ /*        String redirectUrl = "https://oauth.vk.com/access_token?"
                 + "client_id=6843248"
                 + "&client_secret=4ZOc9BOTt8FBUonu0jxe"
                 + "&redirect_uri=https://webim-test1.herokuapp.com/listener"
                 + "&code=" + code;
 
-        response.sendRedirect(redirectUrl);
+        response.sendRedirect(redirectUrl);*/
         
-        /*UserAuthResponse authResponse = null;
+       UserAuthResponse authResponse = null;
         
         try {
             authResponse = vk.oauth() 
@@ -65,9 +65,9 @@ public class Authorization extends HttpServlet {
         } catch (ClientException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } */
+        } 
         
-       // UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
+        UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
     }
 
     /**
