@@ -51,7 +51,7 @@ public class Listener extends HttpServlet {
         vkSession.setAttribute("code", request.getParameter("code"));
         vkSession.setAttribute("access_token", request.getParameter("access_token"));
         vkSession.setAttribute("vkPesp", vkPesp);
-        response.sendRedirect("/Authorization");
+        //response.sendRedirect("/Authorization");
         UserAuthResponse authResponse = null;
         
         
