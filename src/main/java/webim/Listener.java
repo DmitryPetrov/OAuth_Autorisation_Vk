@@ -37,6 +37,12 @@ public class Listener extends HttpServlet {
         if (session_id != null) {
             ServletContext context = getServletConfig().getServletContext();
             session = (HttpSession) context.getAttribute(session_id);
+            
+            //session.setAttribute("vkResponse", vkPesp);
+            session.setAttribute("OAuthCode", request.getParameter("code"));
+            session.setAttribute("vkURL", request.getParameter("vkURL"));
+
+            response.sendRedirect("/OAuthCode");
         } else {
             return;
         }
