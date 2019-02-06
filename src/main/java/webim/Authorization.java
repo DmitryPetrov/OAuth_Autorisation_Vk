@@ -42,7 +42,7 @@ public class Authorization extends HttpServlet {
         
         int APP_ID = 6843248;
         String CLIENT_SECRET = "n6qiMy0lvv7DaUVxTXpe";
-        String REDIRECT_URI = "https://webim-test1.herokuapp.com/AcceptAccessToken";
+        String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
         String code = (String) session.getAttribute("code");
         
         UserAuthResponse authResponse = null;
