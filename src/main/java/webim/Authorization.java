@@ -58,6 +58,8 @@ public class Authorization extends HttpServlet {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } 
+        
+        UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
     }
 
     /**

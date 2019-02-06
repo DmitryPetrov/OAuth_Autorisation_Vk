@@ -11,6 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.vk.api.sdk.client.TransportClient;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.objects.UserAuthResponse;
+
 /**
  * Servlet implementation class Listener
  */
@@ -32,34 +40,8 @@ public class Listener extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        String session_id = (String) request.getParameter("session");
-        HttpSession userSession;
-        HttpSession vkSession = request.getSession();
-/*        if (session_id != null) {
-            ServletContext context = getServletConfig().getServletContext();
-            userSession = (HttpSession) context.getAttribute(session_id);
-            
-            userSession.setAttribute("userSession", userSession.getId());
-            userSession.setAttribute("vkSession", request.getSession().getId());
-            
-            userSession.setAttribute("OAuthCode", request.getParameter("code"));
-            userSession.setAttribute("vkURL", request.getParameter("vkURL"));
 
-            vkSession.setAttribute("userSession", userSession.getId());
-            vkSession.setAttribute("vkSession", vkSession.getId());
-            
-            vkSession.setAttribute("OAuthCode", request.getParameter("code"));
-            vkSession.setAttribute("vkURL", request.getParameter("vkURL"));
-            
-            response.sendRedirect("/OAuthCode");
-        } else {
-            return;
-        }*/
-        
-        
         String vkPesp = "";
-        String vkURL = "\n<p>URL request: " + request.getRequestURL() + "?"
-                + request.getQueryString() + "</p>";
 
         vkPesp += "\n<p>URL request: " + request.getRequestURL() + "?"
                 + request.getQueryString() + "</p>";
@@ -79,23 +61,42 @@ public class Listener extends HttpServlet {
         vkPesp += "<form method=\"get\"action=\"/Authorization\">"
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
 
-        ServletContext context = getServletConfig().getServletContext();
- /*       
-        context.setAttribute("userSession", context.getAttribute("session"));
-        context.setAttribute("vkSession", vkSession.getId());
-        
-        context.setAttribute("OAuthCode", request.getParameter("code"));
-        context.setAttribute("vkPesp", request.getParameter("vkPesp"));*/
 
-        vkSession.setAttribute("userSession", context.getAttribute("session"));
-        vkSession.setAttribute("vkSession", vkSession.getId());
-        
+        HttpSession vkSession = request.getSession();
         vkSession.setAttribute("OAuthCode", request.getParameter("code"));
         vkSession.setAttribute("vkPesp", vkPesp);
         
+        UserAuthResponse authResponse = null;
+        
         if ( request.getParameter("code") != null) {
-            response.sendRedirect("/Authorization");
-        } else {
+            
+            TransportClient transportClient = HttpTransportClient.getInstance(); 
+            VkApiClient vk = new VkApiClient(transportClient);
+            
+            int APP_ID = 6843248;
+            String CLIENT_SECRET = "friends";
+            String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
+            String code = request.getParameter("code");
+            
+            
+            
+            try {
+                authResponse = vk.oauth() 
+                        .userAuthorizationCodeFlow(APP_ID, CLIENT_SECRET, REDIRECT_URI, code) 
+                        .execute();
+            } catch (ApiException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (ClientException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } 
+            
+            UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
+            response.sendRedirect("/OAuthCode");
+        } 
+        if( request.getParameter("access_token") != null) {
+            UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
             response.sendRedirect("/OAuthCode");
         }
     }
