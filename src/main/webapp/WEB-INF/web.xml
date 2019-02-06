@@ -25,9 +25,31 @@
 		<servlet-name>OAuthCode</servlet-name>
 		<jsp-file>/responseWithCode.jsp</jsp-file>
 	</servlet>
-	<servlet-mapping>
+		<servlet-mapping>
 		<servlet-name>OAuthCode</servlet-name>
 		<url-pattern>/OAuthCode</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Authorization</servlet-name>
+		<display-name>Authorization</display-name>
+		<description></description>
+		<servlet-class>webim.Authorization</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>Authorization</servlet-name>
+		<url-pattern>/Authorization</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AcceptAccessToken</servlet-name>
+		<display-name>AcceptAccessToken</display-name>
+		<description></description>
+		<servlet-class>webim.AcceptAccessToken</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcceptAccessToken</servlet-name>
+		<url-pattern>/AcceptAccessToken</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
