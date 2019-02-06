@@ -2,6 +2,8 @@
 package webim;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,9 @@ import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.UserAuthResponse;
+import com.vk.api.sdk.objects.friends.responses.GetResponse;
+import com.vk.api.sdk.queries.friends.FriendsGetMutualOrder;
+import com.vk.api.sdk.queries.friends.FriendsGetOrder;
 
 /**
  * Servlet implementation class Authorization
@@ -45,14 +50,6 @@ public class Authorization extends HttpServlet {
         String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
         String code = (String) session.getAttribute("code");
         
- /*        String redirectUrl = "https://oauth.vk.com/access_token?"
-                + "client_id=6843248"
-                + "&client_secret=4ZOc9BOTt8FBUonu0jxe"
-                + "&redirect_uri=https://webim-test1.herokuapp.com/listener"
-                + "&code=" + code;
-
-        response.sendRedirect(redirectUrl);*/
-        
        UserAuthResponse authResponse = null;
         
         try {
@@ -68,8 +65,38 @@ public class Authorization extends HttpServlet {
         } 
         
         UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
-        HttpSession vkSession = request.getSession();
-        vkSession.setAttribute("actor", actor.toString());
+        
+        
+        List<Integer> friends = null;
+        try {
+            GetResponse getResponse = vk.friends().get(actor)
+                    .userId(actor.getId())
+                    .count(10)
+                    .order(FriendsGetOrder.valueOf("random"))
+                    .execute();
+            
+            friends = getResponse.getItems();
+        } catch (ApiException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ClientException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+        
+        
+        session.setAttribute("actor", actor.toString());
+        
+        if (friends != null) {
+            int j = 1;
+            for(Integer i: friends) {
+                session.setAttribute("friend" + j, i);
+                j++;
+            }
+        }
+        
+        
+        
         response.sendRedirect("/OAuthCode");
     }
 

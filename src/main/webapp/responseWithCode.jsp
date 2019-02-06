@@ -7,10 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p><% out.println("code: " + (String) request.getSession().getAttribute("code")); %></p>
-<p><% out.println("access_token: " + (String) request.getSession().getAttribute("access_token")); %></p>
-<p><% out.println("vkPesp: " + (String) request.getSession().getAttribute("vkPesp")); %></p>
-<p><% out.println("vkUrl: " + (String) request.getSession().getAttribute("vkUrl")); %></p>
 <p><% out.println("actor: " + (String) request.getSession().getAttribute("actor")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend1")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend2")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend3")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend4")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend5")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend6")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend7")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend8")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend9")); %></p>
+<p><% out.println("friend: " + (String) request.getSession().getAttribute("friend10")); %></p>
 </body>
 </html>
