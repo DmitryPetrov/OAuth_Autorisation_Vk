@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p><% out.println((String) getServletContext().getAttribute("vkResponse")); %></p>
+<% out.print((String) getServletContext().getAttribute("vkResponse")); %>
+<p><% out.println((String) getServletContext().getAttribute("OAuthCode")); %></p>
 </body>
 </html>
