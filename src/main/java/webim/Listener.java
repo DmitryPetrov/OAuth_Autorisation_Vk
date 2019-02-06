@@ -42,15 +42,18 @@ public class Listener extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
 
         String vkPesp = "";
-        //vkPesp += getParameters(request);
+        vkPesp += getParameters(request);
         vkPesp += "<form method=\"get\"action=\"/Authorization\">"
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
+        
+        String vkUrl = request.getRequestURL().toString();
 
 
         HttpSession vkSession = request.getSession();
         vkSession.setAttribute("code", request.getParameter("code"));
         vkSession.setAttribute("access_token", request.getParameter("access_token"));
         vkSession.setAttribute("vkPesp", vkPesp);
+        vkSession.setAttribute("vkUrl", vkUrl);
         //response.sendRedirect("/Authorization");
         UserAuthResponse authResponse = null;
         response.sendRedirect("/OAuthCode");
