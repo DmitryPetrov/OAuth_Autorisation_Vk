@@ -47,7 +47,7 @@ public class Authorization extends HttpServlet {
         
         String redirectUrl = "https://oauth.vk.com/access_token?"
                 + "client_id=6843248"
-                + "&client_secret=n6qiMy0lvv7DaUVxTXpe"
+                + "&client_secret=4ZOc9BOTt8FBUonu0jxe"
                 + "&redirect_uri=https://webim-test1.herokuapp.com/listener"
                 + "&code=" + code;
 
