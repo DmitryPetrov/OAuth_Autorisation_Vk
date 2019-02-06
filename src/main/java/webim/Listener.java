@@ -42,7 +42,7 @@ public class Listener extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
 
         String vkPesp = "";
-        vkPesp += getParameters(request);
+        //vkPesp += getParameters(request);
         vkPesp += "<form method=\"get\"action=\"/Authorization\">"
                 + "<input type=\"submit\" value=\"Submit\">" + "</form>";
 

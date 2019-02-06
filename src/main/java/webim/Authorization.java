@@ -59,7 +59,7 @@ public class Authorization extends HttpServlet {
             e.printStackTrace();
         } 
         
-        UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
+       // UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
     }
 
     /**
