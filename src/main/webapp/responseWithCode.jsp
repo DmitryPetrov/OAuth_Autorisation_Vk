@@ -9,5 +9,6 @@
 <body>
 <% out.print((String) getServletContext().getAttribute("vkResponse")); %>
 <p><% out.println((String) getServletContext().getAttribute("OAuthCode")); %></p>
+<p><% out.println((String) getServletContext().getAttribute("vkURL")); %></p>
 </body>
 </html>

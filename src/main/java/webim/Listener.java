@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Listener
  */
-//@WebServlet("/listener")
+// @WebServlet("/listener")
 public class Listener extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -32,28 +32,32 @@ public class Listener extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         String vkPesp = "";
-        
-        vkPesp += "\n<p>URL request: " + request.getRequestURL() + "?" + request.getQueryString() + "</p>";
-        
-        vkPesp += "<li>METHOD: "+ request.getMethod() + "</li>";
-        vkPesp += "<li>Protocol: "+ request.getProtocol() + "</li>";
-        vkPesp += "<li>Port: "+ request.getLocalPort() + "</li>";
-        vkPesp += "<li>URL: "+ request.getRequestURL() + "</li>";
-        vkPesp += "<li>URI: "+ request.getRequestURI() + "</li>";
+        String vkURL = "\n<p>URL request: " + request.getRequestURL() + "?"
+                + request.getQueryString() + "</p>";
+
+        vkPesp += "\n<p>URL request: " + request.getRequestURL() + "?"
+                + request.getQueryString() + "</p>";
+
+        vkPesp += "<li>METHOD: " + request.getMethod() + "</li>";
+        vkPesp += "<li>Protocol: " + request.getProtocol() + "</li>";
+        vkPesp += "<li>Port: " + request.getLocalPort() + "</li>";
+        vkPesp += "<li>URL: " + request.getRequestURL() + "</li>";
+        vkPesp += "<li>URI: " + request.getRequestURI() + "</li>";
         vkPesp += getHeaders(request);
-        
-        vkPesp += "\n\n<p>Request parameters: " + request.getQueryString() + "</p>";
-        
+
+        vkPesp += "\n\n<p>Request parameters: " + request.getQueryString()
+                + "</p>";
+
         vkPesp += getParameters(request);
-        
+
         vkPesp += "<form method=\"get\"action=\"/Authorization\">"
-                + "<input type=\"submit\" value=\"Submit\">"
-                + "</form>";
-        
+                + "<input type=\"submit\" value=\"Submit\">" + "</form>";
+
         HttpSession session = request.getSession();
         session.setAttribute("vkResponse", vkPesp);
         session.setAttribute("OAuthCode", request.getParameter("code"));
-        
+        session.setAttribute("vkURL", request.getParameter("vkURL"));
+
         response.sendRedirect("/OAuthCode");
     }
 
@@ -81,18 +85,20 @@ public class Listener extends HttpServlet {
 
         return result;
     }
-    
-    protected String getHeaders(HttpServletRequest request) throws ServletException, IOException {
+
+    protected String getHeaders(HttpServletRequest request)
+            throws ServletException, IOException {
         String result = "";
-        
+
         Enumeration<String> headerNames = request.getHeaderNames();
-        
-        while(headerNames.hasMoreElements()) {
+
+        while (headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
-            result += ("<li>" + headerName + ": " + request.getHeader(headerName) + "</li>\n");
+            result += ("<li>" + headerName + ": "
+                    + request.getHeader(headerName) + "</li>\n");
         }
-        
+
         return result;
-    }    
-    
+    }
+
 }
