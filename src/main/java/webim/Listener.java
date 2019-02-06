@@ -35,7 +35,7 @@ public class Listener extends HttpServlet {
         String session_id = (String) request.getParameter("session");
         HttpSession userSession;
         HttpSession vkSession = request.getSession();
-        if (session_id != null) {
+        //if (session_id != null) {
             ServletContext context = getServletConfig().getServletContext();
             userSession = (HttpSession) context.getAttribute(session_id);
             
@@ -53,9 +53,9 @@ public class Listener extends HttpServlet {
             vkSession.setAttribute("vkURL", request.getParameter("vkURL"));
             
             response.sendRedirect("/OAuthCode");
-        } else {
+      //  } else {
             return;
-        }
+      //  }
         
         
 /*        String vkPesp = "";
