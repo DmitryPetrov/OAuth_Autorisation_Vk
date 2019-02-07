@@ -97,7 +97,7 @@ public class Authorization extends HttpServlet {
                             .fields(fields)
                             .execute();
                     
-                    session.setAttribute("friend" + j, i.toString());
+                    session.setAttribute("friend" + j, user_info);
                     j++;
                     
                 }
