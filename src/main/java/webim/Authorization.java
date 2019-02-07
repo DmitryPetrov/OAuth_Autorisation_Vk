@@ -151,13 +151,13 @@ public class Authorization extends HttpServlet {
     private String getHtmlAccountInfo(Map<String, String> userAccountInfo) {
         StringBuilder table = new StringBuilder();
         table.append("<div=\"account\">");
-        table.append("<img src=\"" + userAccountInfo.remove("photo") + "\" alt=\"альтернативный текст\">");
-        table.append("&nbsp&nbsp&nbsp");
+        table.append("<img src=\"" + userAccountInfo.remove("photo") + "\">");
+        table.append("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
         table.append(userAccountInfo.remove("firstName"));
         table.append("&nbsp");
         table.append(userAccountInfo.remove("lastName"));
-        table.append("&nbsp&nbsp&nbsp");
-        table.append("<a href=\"https://vk.com/" + userAccountInfo.get("domain") + "\">\"https://vk.com/" + userAccountInfo.remove("domain") + "</a>");
+        table.append("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
+        table.append("<a href=\"https://vk.com/" + userAccountInfo.get("domain") + "\">https://vk.com/" + userAccountInfo.remove("domain") + "</a>");
         table.append("</div>");
 
         return table.toString();
