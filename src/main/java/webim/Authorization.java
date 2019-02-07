@@ -100,7 +100,7 @@ public class Authorization extends HttpServlet {
                             + userFull.getDomain() + " "
                             + userFull.getPhoto200();
                 }
-
+                
                 session.setAttribute("friend" + i, userInfoStr);
             }
 
