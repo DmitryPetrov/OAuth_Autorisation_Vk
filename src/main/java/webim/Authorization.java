@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,6 @@ import com.vk.api.sdk.objects.UserAuthResponse;
 import com.vk.api.sdk.objects.friends.responses.GetResponse;
 import com.vk.api.sdk.objects.users.UserFull;
 import com.vk.api.sdk.objects.users.UserXtrCounters;
-import com.vk.api.sdk.queries.friends.FriendsGetOrder;
 import com.vk.api.sdk.queries.users.UserField;
 
 /**
@@ -72,9 +72,14 @@ public class Authorization extends HttpServlet {
                 return;
             }
 
-            for (int i = 0; i < friends.size(); i++) {
-
-                List<UserXtrCounters> friendAccountFields = getAccountFields(vk, userAccount, friends.get(i).toString());
+            Random random = new Random();
+            
+            for (int i = 0; i < 5; i++) {
+                
+                int randomFriend = random.nextInt(friends.size());
+                
+                
+                List<UserXtrCounters> friendAccountFields = getAccountFields(vk, userAccount, friends.get(randomFriend).toString());
 
                 Map<String, String> friendAccountInfo = getAccountInfo(friendAccountFields.get(0));
                 
@@ -141,8 +146,6 @@ public class Authorization extends HttpServlet {
         GetResponse getResponse = vk.friends()
                 .get(userAccount)
                 .userId(userAccount.getId())
-                .count(10)
-                .order(FriendsGetOrder.HINTS)
                 .execute();
 
         return getResponse.getItems();
