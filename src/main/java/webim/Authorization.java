@@ -152,10 +152,11 @@ public class Authorization extends HttpServlet {
         StringBuilder table = new StringBuilder();
         table.append("<div>");
         table.append("<img src=\"" + userAccountInfo.remove("photo") + "\" alt=\"альтернативный текст\">");
-        table.append(" ");
+        table.append("&nbsp&nbsp&nbsp");
         table.append(userAccountInfo.remove("firstName"));
-        table.append(" ");
+        table.append("&nbsp");
         table.append(userAccountInfo.remove("lastName"));
+        table.append("&nbsp&nbsp&nbsp");
         table.append("<a href=\"https://vk.com/" + userAccountInfo.get("domain") + "\">\"https://vk.com/" + userAccountInfo.remove("domain") + "</a>");
         table.append("</div>");
 
