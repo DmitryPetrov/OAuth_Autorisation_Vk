@@ -19,6 +19,7 @@ import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.UserAuthResponse;
 import com.vk.api.sdk.objects.friends.responses.GetResponse;
+import com.vk.api.sdk.objects.users.UserXtrCounters;
 import com.vk.api.sdk.queries.friends.FriendsGetMutualOrder;
 import com.vk.api.sdk.queries.friends.FriendsGetOrder;
 import com.vk.api.sdk.queries.users.UserField;
@@ -81,25 +82,22 @@ public class Authorization extends HttpServlet {
             friends = getResponse.getItems();
             
             session.setAttribute("actor", actor.toString());
-            
-            
-            UsersGetQuery getResponse2;
+
+            List<UserXtrCounters> user_info;
             
             List<UserField> fields = new ArrayList<UserField>();
             fields.add(UserField.PHOTO_200);
             fields.add(UserField.DOMAIN);
-            
-            
-            
+
             if (friends != null) {
                 int j = 1;
                 for(Integer i: friends) {
-                    getResponse2 = (UsersGetQuery) vk.users().get(actor)
+                    user_info = vk.users().get(actor)
                             .userIds(i.toString())
                             .fields(fields)
                             .execute();
                     
-                    session.setAttribute("friend" + j, getResponse2.toString());
+                    session.setAttribute("friend" + j, i.toString());
                     j++;
                     
                 }
