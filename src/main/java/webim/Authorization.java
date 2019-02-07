@@ -92,6 +92,7 @@ public class Authorization extends HttpServlet {
         } catch (ClientException e) {
             e.printStackTrace();
         }
+        session.setAttribute("Authorization", "true");
         response.sendRedirect("/OAuthCode");
     }
 
