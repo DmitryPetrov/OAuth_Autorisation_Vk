@@ -94,7 +94,7 @@ public class Authorization extends HttpServlet {
                 String userInfoStr = "";
 
                 for (int j = 0; j < userInfo.size(); j++) {
-                    UserFull userFull = (UserFull) userInfo.get(i);
+                    UserFull userFull = (UserFull) userInfo.get(j);
                     userInfoStr = userFull.getFirstName() + " "
                             + userFull.getLastName() + " "
                             + userFull.getDomain() + " "
