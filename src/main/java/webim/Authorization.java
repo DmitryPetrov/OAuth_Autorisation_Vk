@@ -94,7 +94,7 @@ public class Authorization extends HttpServlet {
             
             for(int i = 0; i < friends.size(); i++) {
                 
-                String id = " + ";
+                String id = "" + friends.get(i);
                 
                 userInfo = vk.users().get(actor)
                         .userIds(id)
