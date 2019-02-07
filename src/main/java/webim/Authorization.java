@@ -20,6 +20,7 @@ import com.vk.api.sdk.objects.UserAuthResponse;
 import com.vk.api.sdk.objects.friends.responses.GetResponse;
 import com.vk.api.sdk.queries.friends.FriendsGetMutualOrder;
 import com.vk.api.sdk.queries.friends.FriendsGetOrder;
+import com.vk.api.sdk.queries.users.UserField;
 import com.vk.api.sdk.queries.users.UsersGetQuery;
 
 /**
@@ -82,15 +83,18 @@ public class Authorization extends HttpServlet {
             
             
             UsersGetQuery getResponse2;
-                    
+            
+            
             if (friends != null) {
                 int j = 1;
                 for(Integer i: friends) {
-/*                    getResponse2 = (UsersGetQuery) vk.users().get(actor)
+                    getResponse2 = (UsersGetQuery) vk.users().get(actor)
                             .userIds(i.toString())
-                            .execute();*/
+                            .fields(UserField.PHOTO_200)
+                            .fields(UserField.DOMAIN)
+                            .execute();
                     
-                    session.setAttribute("friend" + j, i.toString());
+                    session.setAttribute("friend" + j, getResponse2.toString());
                     j++;
                     
                 }
