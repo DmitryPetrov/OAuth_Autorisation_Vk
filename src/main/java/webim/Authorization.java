@@ -2,6 +2,7 @@
 package webim;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -84,14 +85,18 @@ public class Authorization extends HttpServlet {
             
             UsersGetQuery getResponse2;
             
+            List<UserField> fields = new ArrayList<UserField>();
+            fields.add(UserField.PHOTO_200);
+            fields.add(UserField.DOMAIN);
+            
+            
             
             if (friends != null) {
                 int j = 1;
                 for(Integer i: friends) {
                     getResponse2 = (UsersGetQuery) vk.users().get(actor)
                             .userIds(i.toString())
-                            .fields(UserField.PHOTO_200)
-                            .fields(UserField.DOMAIN)
+                            .fields(fields)
                             .execute();
                     
                     session.setAttribute("friend" + j, getResponse2.toString());
