@@ -3,7 +3,9 @@ package webim;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,10 +23,8 @@ import com.vk.api.sdk.objects.UserAuthResponse;
 import com.vk.api.sdk.objects.friends.responses.GetResponse;
 import com.vk.api.sdk.objects.users.UserFull;
 import com.vk.api.sdk.objects.users.UserXtrCounters;
-import com.vk.api.sdk.queries.friends.FriendsGetMutualOrder;
 import com.vk.api.sdk.queries.friends.FriendsGetOrder;
 import com.vk.api.sdk.queries.users.UserField;
-import com.vk.api.sdk.queries.users.UsersGetQuery;
 
 /**
  * Servlet implementation class Authorization
@@ -47,61 +47,40 @@ public class Authorization extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        String code = (String) session.getAttribute("code");
-
-        int APP_ID = 6843248;
-        String CLIENT_SECRET = "4ZOc9BOTt8FBUonu0jxe";
-        String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
-
         TransportClient transportClient = HttpTransportClient.getInstance();
         VkApiClient vk = new VkApiClient(transportClient);
-        UserAuthResponse authResponse = null;
-        try {
-            authResponse = vk.oauth().userAuthorizationCodeFlow(APP_ID,
-                    CLIENT_SECRET, REDIRECT_URI, code).execute();
-        } catch (ApiException e) {
-            e.printStackTrace();
-        } catch (ClientException e) {
-            e.printStackTrace();
+        
+        HttpSession session = request.getSession();
+        String code = (String) session.getAttribute("code");
+        if(code == null) {
+            return;
         }
-        UserActor actor = new UserActor(authResponse.getUserId(),
-                authResponse.getAccessToken());
-        session.setAttribute("actor", actor.toString());
 
         try {
-            GetResponse getResponse =
-                    vk.friends().get(actor).userId(actor.getId()).count(10)
-                            .order(FriendsGetOrder.HINTS).execute();
+            UserActor userAccount = getUserAccount(transportClient, vk, code);
+            
+            List<UserXtrCounters> userAccountFields = getAccountFields(vk, userAccount, userAccount.getId().toString());
 
-            List<Integer> friends = getResponse.getItems();
+            Map<String, String> userAccountInfo = getAccountInfo(userAccountFields.get(0));
+            
+            String UserAccountHtml = getHtmlAccountInfo(userAccountInfo);
+            
+            session.setAttribute("user", UserAccountHtml);
+            
+            List<Integer> friends = getFriends(vk, userAccount);
             if (friends == null) {
                 return;
             }
 
-            List<UserField> fields = new ArrayList<UserField>();
-            fields.add(UserField.PHOTO_200);
-            fields.add(UserField.DOMAIN);
-
-            List<UserXtrCounters> userInfo;
             for (int i = 0; i < friends.size(); i++) {
 
-                String id = "" + friends.get(i);
+                List<UserXtrCounters> friendAccountFields = getAccountFields(vk, userAccount, friends.get(i).toString());
 
-                userInfo = vk.users().get(actor).userIds(id).fields(fields)
-                        .execute();
-
-                String userInfoStr = "";
-
-                for (int j = 0; j < userInfo.size(); j++) {
-                    UserFull userFull = (UserFull) userInfo.get(j);
-                    userInfoStr = userFull.getFirstName() + " "
-                            + userFull.getLastName() + " "
-                            + userFull.getDomain() + " "
-                            + userFull.getPhoto200();
-                }
+                Map<String, String> friendAccountInfo = getAccountInfo(friendAccountFields.get(0));
                 
-                session.setAttribute("friend" + i, userInfoStr);
+                String friendAccountHtml = getHtmlAccountInfo(friendAccountInfo);
+                
+                session.setAttribute("friend" + i, friendAccountHtml);
             }
 
         } catch (ApiException e) {
@@ -109,8 +88,78 @@ public class Authorization extends HttpServlet {
         } catch (ClientException e) {
             e.printStackTrace();
         }
-
         response.sendRedirect("/OAuthCode");
+    }
+
+    private UserActor getUserAccount(TransportClient client, VkApiClient vk, String code) throws ApiException, ClientException {
+        int APP_ID = 6843248;
+        String CLIENT_SECRET = "4ZOc9BOTt8FBUonu0jxe";
+        String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
+
+        
+        UserAuthResponse authResponse = null;
+        
+        authResponse = vk.oauth().userAuthorizationCodeFlow(APP_ID,
+                CLIENT_SECRET, REDIRECT_URI, code).execute();
+        
+        UserActor userAccount = new UserActor(authResponse.getUserId(),
+                authResponse.getAccessToken());
+        
+        return userAccount;
+    }
+    
+    private List<UserXtrCounters> getAccountFields(VkApiClient vk,
+            UserActor userAccount, String accountId)
+            throws ApiException, ClientException {
+       
+        List<UserField> fields = new ArrayList<UserField>();
+        fields.add(UserField.PHOTO_200);
+        fields.add(UserField.DOMAIN);
+
+        List<UserXtrCounters> accountInfo = vk.users()
+                .get(userAccount)
+                .userIds(accountId).fields(fields).execute();
+ 
+        return accountInfo;
+    }
+
+    private Map<String, String> getAccountInfo(UserXtrCounters item) {
+        UserFull userFull = (UserFull) item;
+
+        Map<String, String> info = new HashMap<String, String>();
+        info.put("firstName", userFull.getFirstName());
+        info.put("lastName", userFull.getLastName());
+        info.put("photo", userFull.getPhoto200());
+        info.put("domain", userFull.getDomain());
+        
+        return info;
+    }
+
+    private List<Integer> getFriends(VkApiClient vk, UserActor userAccount)
+            throws ApiException, ClientException {
+        
+        GetResponse getResponse = vk.friends()
+                .get(userAccount)
+                .userId(userAccount.getId())
+                .count(10)
+                .order(FriendsGetOrder.HINTS)
+                .execute();
+
+        return getResponse.getItems();
+    }
+
+    private String getHtmlAccountInfo(Map<String, String> userAccountInfo) {
+        StringBuilder table = new StringBuilder();
+        table.append("<div>");
+        table.append("<img src=\"" + userAccountInfo.remove("photo") + "\" alt=\"альтернативный текст\">");
+        table.append(" ");
+        table.append(userAccountInfo.remove("firstName"));
+        table.append(" ");
+        table.append(userAccountInfo.remove("lastName"));
+        table.append("<a href=\"https://vk.com/" + userAccountInfo.get("domain") + "\">\"https://vk.com/" + userAccountInfo.remove("domain") + "</a>");
+        table.append("</div>");
+
+        return table.toString();
     }
 
     /**
