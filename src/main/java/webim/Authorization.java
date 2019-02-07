@@ -152,7 +152,7 @@ public class Authorization extends HttpServlet {
 
     private String getHtmlAccountInfo(Map<String, String> userAccountInfo) {
         StringBuilder table = new StringBuilder();
-        table.append("<div=\"account\" style=\"{min-height: 200 px;line-height: 5em;text-align: left;}\">");
+        table.append("<div=\"account\">");
         table.append("<img src=\"" + userAccountInfo.remove("photo") + "\">");
         table.append("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
         table.append(userAccountInfo.remove("firstName"));

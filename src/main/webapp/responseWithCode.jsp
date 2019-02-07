@@ -11,11 +11,11 @@
 		<main> 
 			<p class="user"><strong><% out.println((String) request.getSession().getAttribute("user")); %></strong></p>
 			<p><br><br><br></p>
+			<p><% out.println((String) request.getSession().getAttribute("friend0")); %></p>
 			<p><% out.println((String) request.getSession().getAttribute("friend1")); %></p>
 			<p><% out.println((String) request.getSession().getAttribute("friend2")); %></p>
 			<p><% out.println((String) request.getSession().getAttribute("friend3")); %></p>
 			<p><% out.println((String) request.getSession().getAttribute("friend4")); %></p>
-			<p><% out.println((String) request.getSession().getAttribute("friend5")); %></p>
 			<p></p>
 		</main>
 	</body>
