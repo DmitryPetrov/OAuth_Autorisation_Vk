@@ -52,3 +52,8 @@ section {
 .user {
 	border-bottom: medium #000;
 }
+
+.account {
+	min-height: 200 px;
+	line-height: 5em;
+}

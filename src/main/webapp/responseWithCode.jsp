@@ -10,7 +10,7 @@
 	<body>
 		<main> 
 			<p class="user"><strong><% out.println((String) request.getSession().getAttribute("user")); %></strong></p>
-			<p><br></p>
+			<p><br><br><br></p>
 			<p><% out.println((String) request.getSession().getAttribute("friend1")); %></p>
 			<p><% out.println((String) request.getSession().getAttribute("friend2")); %></p>
 			<p><% out.println((String) request.getSession().getAttribute("friend3")); %></p>
