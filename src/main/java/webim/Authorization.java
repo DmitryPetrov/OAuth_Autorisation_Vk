@@ -76,10 +76,9 @@ public class Authorization extends HttpServlet {
             
             for (int i = 0; i < 5; i++) {
                 
-                int randomFriend = random.nextInt(friends.size());
+                int randomFriend = random.nextInt((friends.size() - i));             
                 
-                
-                List<UserXtrCounters> friendAccountFields = getAccountFields(vk, userAccount, friends.get(randomFriend).toString());
+                List<UserXtrCounters> friendAccountFields = getAccountFields(vk, userAccount, friends.remove(randomFriend).toString());
 
                 Map<String, String> friendAccountInfo = getAccountInfo(friendAccountFields.get(0));
                 
