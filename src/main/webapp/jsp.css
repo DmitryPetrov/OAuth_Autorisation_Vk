@@ -31,7 +31,6 @@ p:not(:last-child){
 
 main {
 	font-family: "Open Sans", "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-	text-align: center;
 	max-width: 1200px;
 	padding: 80px;
 	border: 1px solid rgba(0, 0, 0, .2);
@@ -45,6 +44,12 @@ section {
 	border-top: 1px solid #abc;
 }
 
-.button {
-	width: 150px;
+p.user {
+	border-bottom: medium #000;
+}
+
+div.account {
+	min-height: 200 px;
+	line-height: 5em;
+	text-align: left;
 }
