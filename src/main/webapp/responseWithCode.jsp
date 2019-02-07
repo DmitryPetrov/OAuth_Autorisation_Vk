@@ -4,14 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="index.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
-<body>
-<p><strong><% out.println("user: " + (String) request.getSession().getAttribute("user")); %></strong></p>
-<p><% out.println("friend1: " + (String) request.getSession().getAttribute("friend1")); %></p>
-<p><% out.println("friend2: " + (String) request.getSession().getAttribute("friend2")); %></p>
-<p><% out.println("friend3: " + (String) request.getSession().getAttribute("friend3")); %></p>
-<p><% out.println("friend4: " + (String) request.getSession().getAttribute("friend4")); %></p>
-<p><% out.println("friend5: " + (String) request.getSession().getAttribute("friend5")); %></p>
-</body>
+	<body>
+		<main> 
+			<p><strong><% out.println((String) request.getSession().getAttribute("user")); %></strong></p>
+			<p><br></p>
+			<p><% out.println((String) request.getSession().getAttribute("friend1")); %></p>
+			<p><% out.println((String) request.getSession().getAttribute("friend2")); %></p>
+			<p><% out.println((String) request.getSession().getAttribute("friend3")); %></p>
+			<p><% out.println((String) request.getSession().getAttribute("friend4")); %></p>
+			<p><% out.println((String) request.getSession().getAttribute("friend5")); %></p>
+		
+		</main>
+	</body>
 </html>
