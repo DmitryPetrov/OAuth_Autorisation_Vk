@@ -45,33 +45,30 @@ public class Authorization extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
-        TransportClient transportClient = HttpTransportClient.getInstance(); 
-        VkApiClient vk = new VkApiClient(transportClient);
+        String code = (String) session.getAttribute("code");
         
         int APP_ID = 6843248;
         String CLIENT_SECRET = "4ZOc9BOTt8FBUonu0jxe";
         String REDIRECT_URI = "https://webim-test1.herokuapp.com/listener";
-        String code = (String) session.getAttribute("code");
-        
-       UserAuthResponse authResponse = null;
-        
+      
+        TransportClient transportClient = HttpTransportClient.getInstance(); 
+        VkApiClient vk = new VkApiClient(transportClient);
+        UserAuthResponse authResponse = null;
         try {
             authResponse = vk.oauth() 
                     .userAuthorizationCodeFlow(APP_ID, CLIENT_SECRET, REDIRECT_URI, code) 
                     .execute();
         } catch (ApiException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ClientException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } 
-        
         UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());
+        session.setAttribute("actor", actor.toString());
         
         
-        List<Integer> friends = null;
         try {
             GetResponse getResponse = vk.friends().get(actor)
                     .userId(actor.getId())
@@ -79,36 +76,45 @@ public class Authorization extends HttpServlet {
                     .order(FriendsGetOrder.HINTS)
                     .execute();
             
-            friends = getResponse.getItems();
+            List<Integer> friends = getResponse.getItems();
+            if (friends == null) {
+                return;
+            }
             
-            session.setAttribute("actor", actor.toString());
+            
 
-            List<UserXtrCounters> user_info;
+            List<UserXtrCounters> userInfo;
             
             List<UserField> fields = new ArrayList<UserField>();
             fields.add(UserField.PHOTO_200);
             fields.add(UserField.DOMAIN);
 
-            if (friends != null) {
-                int j = 1;
-                for(Integer i: friends) {
-                    user_info = vk.users().get(actor)
-                            .userIds(i.toString())
-                            .fields(fields)
-                            .execute();
-                    
-                    session.setAttribute("friend" + j, user_info);
-                    j++;
-                    
+
+            
+            
+            for(int i = 0; i < friends.size(); i++) {
+                
+                String id = " + ";
+                
+                userInfo = vk.users().get(actor)
+                        .userIds(id)
+                        .fields(fields)
+                        .execute();
+                
+                String userInfoStr = "";
+                
+                for(int j = 0; j < userInfo.size(); j++) {
+                    userInfoStr += userInfo.get(j) + " ";
                 }
+                
+                session.setAttribute("friend" + i, userInfoStr);      
             }
+            
 
             
         } catch (ApiException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ClientException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } 
         
