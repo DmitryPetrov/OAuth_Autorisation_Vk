@@ -113,7 +113,7 @@ public class Authorization extends HttpServlet {
             throws ApiException, ClientException {
        
         List<UserField> fields = new ArrayList<UserField>();
-        fields.add(UserField.PHOTO_200);
+        fields.add(UserField.PHOTO_100);
         fields.add(UserField.DOMAIN);
 
         List<UserXtrCounters> accountInfo = vk.users()
