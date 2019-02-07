@@ -3,6 +3,8 @@ package webim;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +35,9 @@ public class WebimTest extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("Authorization") != null) {
-            response.sendRedirect("/Authorization");
+            ServletContext servletContext = getServletContext();
+            RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/Authorization");
+            requestDispatcher.forward(request, response);
         }
                
         String redirectUrl = "https://oauth.vk.com/authorize?"
