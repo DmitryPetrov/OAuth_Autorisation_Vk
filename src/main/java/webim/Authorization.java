@@ -93,7 +93,7 @@ public class Authorization extends HttpServlet {
             e.printStackTrace();
         }
         session.setAttribute("Authorization", "true");
-        response.sendRedirect("/OAuthCode");
+        response.sendRedirect("/show_friends");
     }
 
     private UserActor getUserAccount(TransportClient client, VkApiClient vk, String code) throws ApiException, ClientException {

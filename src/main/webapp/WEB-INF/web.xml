@@ -4,12 +4,12 @@
 
 <web-app>
 	<servlet>
-		<servlet-name>WebimTest</servlet-name>
-		<servlet-class>webim.WebimTest</servlet-class>
+		<servlet-name>CodeRequest</servlet-name>
+		<servlet-class>webim.CodeRequest</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>WebimTest</servlet-name>
-		<url-pattern>/webim_req</url-pattern>
+		<servlet-name>CodeRequest</servlet-name>
+		<url-pattern>/CodeRequest</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -22,12 +22,12 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>OAuthCode</servlet-name>
-		<jsp-file>/responseWithCode.jsp</jsp-file>
+		<servlet-name>show_friends</servlet-name>
+		<jsp-file>/show_friends.jsp</jsp-file>
 	</servlet>
 		<servlet-mapping>
-		<servlet-name>OAuthCode</servlet-name>
-		<url-pattern>/OAuthCode</url-pattern>
+		<servlet-name>show_friends</servlet-name>
+		<url-pattern>/show_friends</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

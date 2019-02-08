@@ -15,13 +15,13 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class WebimTest
  */
-public class WebimTest extends HttpServlet {
+public class CodeRequest extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor.
      */
-    public WebimTest() {
+    public CodeRequest() {
         // TODO Auto-generated constructor stub
     }
 
@@ -35,9 +35,9 @@ public class WebimTest extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("Authorization") != null) {
-            ServletContext servletContext = getServletContext();
+/*            ServletContext servletContext = getServletContext();
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/Authorization");
-            requestDispatcher.forward(request, response);
+            requestDispatcher.forward(request, response);*/
         }
                
         String redirectUrl = "https://oauth.vk.com/authorize?"
