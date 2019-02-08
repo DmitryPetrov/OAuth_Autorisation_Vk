@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 public class CodeRequest extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    
     /**
      * Default constructor.
      */
@@ -25,6 +26,7 @@ public class CodeRequest extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
      *      response)
@@ -51,6 +53,7 @@ public class CodeRequest extends HttpServlet {
             response.sendRedirect(redirectUrl);
     }
 
+    
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
      *      response)

@@ -25,11 +25,11 @@
 		<servlet-name>show_friends</servlet-name>
 		<jsp-file>/show_friends.jsp</jsp-file>
 	</servlet>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>show_friends</servlet-name>
 		<url-pattern>/show_friends</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>Authorization</servlet-name>
 		<display-name>Authorization</display-name>
@@ -39,6 +39,17 @@
 		<servlet-mapping>
 		<servlet-name>Authorization</servlet-name>
 		<url-pattern>/Authorization</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RequestFriends</servlet-name>
+		<display-name>RequestFriends</display-name>
+		<description></description>
+		<servlet-class>webim.RequestFriendsFromVk</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RequestFriends</servlet-name>
+		<url-pattern>/RequestFriends</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
