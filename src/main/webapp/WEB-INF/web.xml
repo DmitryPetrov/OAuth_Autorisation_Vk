@@ -1,8 +1,9 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
 
-<web-app>
 	<servlet>
 		<servlet-name>CodeRequest</servlet-name>
 		<servlet-class>webim.CodeRequest</servlet-class>
@@ -32,25 +33,31 @@
 
 	<servlet>
 		<servlet-name>Authorization</servlet-name>
-		<display-name>Authorization</display-name>
-		<description></description>
 		<servlet-class>webim.Authorization</servlet-class>
 	</servlet>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>Authorization</servlet-name>
 		<url-pattern>/Authorization</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>RequestFriends</servlet-name>
-		<display-name>RequestFriends</display-name>
-		<description></description>
 		<servlet-class>webim.RequestFriendsFromVk</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RequestFriends</servlet-name>
 		<url-pattern>/RequestFriends</url-pattern>
 	</servlet-mapping>
+
+	<filter>
+		<filter-name>AutorisationCheckFilter</filter-name>
+		<filter-class>webim.AutorisationCheckFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>AutorisationCheckFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
