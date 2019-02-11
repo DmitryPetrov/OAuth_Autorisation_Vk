@@ -46,6 +46,7 @@ public class AutorisationCheckFilter implements Filter {
             chain.doFilter(request, response);
         } else {
             resp.sendRedirect("/RequestFriends");
+            
         }
     }
 

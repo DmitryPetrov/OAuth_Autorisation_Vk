@@ -2,6 +2,8 @@
 package webim;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +34,9 @@ public class Listener extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("code", request.getParameter("code"));
-        response.sendRedirect("/Authorization");
+        //response.sendRedirect("/Authorization");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Authorization");
+        dispatcher.forward(request,response);
     }
 
     /**

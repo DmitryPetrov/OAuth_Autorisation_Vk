@@ -3,6 +3,7 @@ package webim;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,9 @@ public class Authorization extends HttpServlet {
         HttpSession session = request.getSession();
         String code = (String) session.getAttribute("code");
         if(code == null) {
-            response.sendRedirect("/CodeRequest");
+            //response.sendRedirect("/CodeRequest");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CodeRequest");
+            dispatcher.forward(request,response);
         }
         
         UserActor userAccount = getUserAccount(code);
@@ -52,7 +55,9 @@ public class Authorization extends HttpServlet {
             session.setAttribute("Authorization", "true");
         }
         session.setAttribute("userAccount", userAccount);
-        response.sendRedirect("/RequestFriends");
+        //response.sendRedirect("/RequestFriends");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RequestFriends");
+        dispatcher.forward(request,response);
     }
 
     

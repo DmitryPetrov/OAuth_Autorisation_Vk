@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,12 +52,16 @@ public class RequestFriendsFromVk extends HttpServlet {
         HttpSession session = request.getSession();
         UserActor userAccount = (UserActor) session.getAttribute("userAccount");
         if (userAccount == null) {
-            response.sendRedirect("/Authorization");
+            //response.sendRedirect("/Authorization");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Authorization");
+            dispatcher.forward(request,response);
         }
 
         getInfoFromVk(userAccount, session);
         
-        response.sendRedirect("/show_friends");
+        //response.sendRedirect("/show_friends");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/show_friends");
+        dispatcher.forward(request,response);
     }
     
     
