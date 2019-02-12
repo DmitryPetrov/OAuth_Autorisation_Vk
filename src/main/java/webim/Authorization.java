@@ -56,9 +56,9 @@ public class Authorization extends HttpServlet {
             session.setAttribute("Authorization", "true");
         }
         session.setAttribute("userAccount", userAccount);
-        response.sendRedirect("/RequestFriends");
-        //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RequestFriends");
-        //dispatcher.forward(request,response);
+        String page = "/RequestFriends";
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+        dispatcher.forward(request,response);
     }
 
     
