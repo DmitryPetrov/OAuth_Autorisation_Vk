@@ -45,7 +45,8 @@ public class Authorization extends HttpServlet {
         String code = (String) session.getAttribute("code");
         if(code == null) {
             //response.sendRedirect("/CodeRequest");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CodeRequest");
+            String page = "/CodeRequest";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request,response);
         }
         
