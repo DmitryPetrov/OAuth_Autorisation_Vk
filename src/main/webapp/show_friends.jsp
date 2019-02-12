@@ -16,7 +16,6 @@
 			<p><% out.println((String) request.getSession().getAttribute("friend2")); %></p>
 			<p><% out.println((String) request.getSession().getAttribute("friend3")); %></p>
 			<p><% out.println((String) request.getSession().getAttribute("friend4")); %></p>
-			<p><% out.println((String) request.getSession().getAttribute("code")); %></p>
 			<p></p>
 		</main>
 	</body>
