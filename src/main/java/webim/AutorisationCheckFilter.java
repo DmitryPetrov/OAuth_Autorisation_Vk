@@ -37,7 +37,7 @@ public class AutorisationCheckFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {
         
-/*        HttpServletResponse resp = (HttpServletResponse) response;
+        HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         
@@ -45,7 +45,7 @@ public class AutorisationCheckFilter implements Filter {
             resp.sendRedirect("/index.html");
         } else {
             resp.sendRedirect("/RequestFriends");
-        }*/
+        }
         chain.doFilter(request, response);
     }
 
