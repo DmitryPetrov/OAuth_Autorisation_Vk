@@ -53,12 +53,15 @@
 		<filter-name>AutorisationCheckFilter</filter-name>
 		<filter-class>webim.AutorisationCheckFilter</filter-class>
 	</filter>
-
 	<filter-mapping>
 		<filter-name>AutorisationCheckFilter</filter-name>
-		<url-pattern>/index.html</url-pattern>
-		
+		<url-pattern>/index.html</url-pattern>	
 	</filter-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
 
 	<welcome-file-list>
 		<welcome-file>/index.html</welcome-file>
