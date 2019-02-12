@@ -44,10 +44,10 @@ public class Authorization extends HttpServlet {
         HttpSession session = request.getSession();
         String code = (String) session.getAttribute("code");
         if(code == null) {
-            //response.sendRedirect("/CodeRequest");
             String page = "/CodeRequest";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request,response);
+            return;
         }
         
         UserActor userAccount = getUserAccount(code);
