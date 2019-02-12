@@ -60,8 +60,8 @@ public class RequestFriendsFromVk extends HttpServlet {
 
         getInfoFromVk(userAccount, session);
         
-        //response.sendRedirect("/show_friends");
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/show_friends");
+        String page = "/show_friends";
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request,response);
     }
     
