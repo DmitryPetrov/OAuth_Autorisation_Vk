@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.vk.api.sdk.client.actors.UserActor;
+
 /**
  * Servlet Filter implementation class AutorisationCheckFilter
  */
@@ -40,8 +42,9 @@ public class AutorisationCheckFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
+        UserActor userAccount = (UserActor) session.getAttribute("userAccount");
         
-        if(session.isNew()) {
+        if(userAccount == null) {
             chain.doFilter(request, response);
         } else {
             resp.sendRedirect("/RequestFriends");
