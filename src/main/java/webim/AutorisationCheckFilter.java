@@ -39,7 +39,7 @@ public class AutorisationCheckFilter implements Filter {
         
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession();
         
         if(session.isNew()) {
             resp.sendRedirect("/index.html");
