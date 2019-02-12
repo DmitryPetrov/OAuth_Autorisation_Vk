@@ -42,11 +42,11 @@ public class AutorisationCheckFilter implements Filter {
         HttpSession session = req.getSession();
         
         if(session.isNew()) {
-            resp.sendRedirect("/index.html");
+            chain.doFilter(request, response);
         } else {
             resp.sendRedirect("/RequestFriends");
         }
-        chain.doFilter(request, response);
+        
     }
 
     /**
