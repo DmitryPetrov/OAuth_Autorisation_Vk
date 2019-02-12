@@ -56,6 +56,7 @@ public class Authorization extends HttpServlet {
             session.setAttribute("Authorization", "true");
         }
         session.setAttribute("userAccount", userAccount);
+        
         String page = "/RequestFriends";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request,response);

@@ -34,7 +34,7 @@ public class Listener extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("code", request.getParameter("code"));
-        //response.sendRedirect("/Authorization");
+
         String page = "/Authorization";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request,response);
