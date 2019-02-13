@@ -51,6 +51,7 @@ public class RequestFriendsFromVk extends HttpServlet {
 
         HttpSession session = request.getSession();
         if(session.getAttribute("already_visit") == null) {
+            session.setAttribute("already_visit", "true");
             String page = "/index.html";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request,response);
@@ -58,7 +59,7 @@ public class RequestFriendsFromVk extends HttpServlet {
         }
         
         
-        session.setAttribute("already_visit", "true");
+        
         
         
         UserActor userAccount = (UserActor) session.getAttribute("userAccount");
