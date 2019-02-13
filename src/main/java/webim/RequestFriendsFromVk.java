@@ -61,13 +61,13 @@ public class RequestFriendsFromVk extends HttpServlet {
         session.setAttribute("already_visit", "true");
         
         
-        UserActor userAccount = (UserActor) session.getAttribute("userAccount");
+/*        UserActor userAccount = (UserActor) session.getAttribute("userAccount");
         if (userAccount == null) {
             String page = "/index.html";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request,response);
             return;
-        }
+        }*/
 
         getInfoFromVk(userAccount, session);
         
