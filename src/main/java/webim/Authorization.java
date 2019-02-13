@@ -51,6 +51,8 @@ public class Authorization extends HttpServlet {
                 page = "/index.html";
             } else {         
                 Integer user_id = (Integer) session.getAttribute("user_id");
+                session.setAttribute("user_id", user_id);
+                session.setAttribute("access_token", access_token);
                 
                 UserActor userAccount = getUserAccount(user_id, access_token);
                 session.setAttribute("userAccount", userAccount);

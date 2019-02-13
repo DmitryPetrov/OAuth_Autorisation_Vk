@@ -56,6 +56,7 @@ public class RequestFriendsFromVk extends HttpServlet {
         if (userAccount == null) {
             page = "/Authorization";
         } else {
+            session.setAttribute("userAccount", userAccount);
             getInfoFromVk(userAccount, session);    
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
