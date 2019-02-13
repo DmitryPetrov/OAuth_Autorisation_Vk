@@ -45,7 +45,7 @@ public class AutorisationCheckFilter implements Filter {
         UserActor userAccount = (UserActor) session.getAttribute("userAccount");
         
         if(session.isNew()) {
-            chain.doFilter(request, response);
+            resp.sendRedirect("/index.html");
         } else {
             resp.sendRedirect("/RequestFriends");
         }
