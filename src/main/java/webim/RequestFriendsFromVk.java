@@ -50,7 +50,7 @@ public class RequestFriendsFromVk extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        if(session.getAttribute("already_visit") == null) {
+        if(((String) session.getAttribute("already_visit")) == null) {
             session.setAttribute("already_visit", "true");
             String page = "/index.html";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
