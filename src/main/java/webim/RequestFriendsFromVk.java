@@ -52,7 +52,7 @@ public class RequestFriendsFromVk extends HttpServlet {
         HttpSession session = request.getSession();
         UserActor userAccount = (UserActor) session.getAttribute("userAccount");
         if (userAccount == null) {
-            String page = "/Authorization";
+            String page = "/index.html";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request,response);
             return;
