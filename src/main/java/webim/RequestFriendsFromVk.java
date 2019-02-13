@@ -54,7 +54,7 @@ public class RequestFriendsFromVk extends HttpServlet {
         UserActor userAccount = (UserActor) session.getAttribute("userAccount");
         String page = "/show_friends";
         if (userAccount == null) {
-            page = "/index.html";
+            page = "/Authorization";
         } else {
             getInfoFromVk(userAccount, session);    
         }
