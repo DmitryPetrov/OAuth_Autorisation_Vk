@@ -44,12 +44,22 @@ public class AutorisationCheckFilter implements Filter {
         HttpSession session = req.getSession();
         UserActor userAccount = (UserActor) session.getAttribute("userAccount");
         
-        if(session.isNew()) {
+/*        if(session.isNew()) {
             resp.sendRedirect("/index.html");
         } else {
             resp.sendRedirect("/RequestFriends");
-        }
+        }*/
         
+        String url = req.getRequestURL().toString();
+        if(url.lastIndexOf("/fizz") > -1) //fix this as it could be /fizz33 too
+        {
+
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("fizz.jsp"); //or whatever page..
+            dispatcher.forward(req, res);
+        } else {
+            fc.doFilter(req, res);
+        }
     }
 
     /**
