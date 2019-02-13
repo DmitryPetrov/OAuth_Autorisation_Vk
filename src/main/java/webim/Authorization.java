@@ -42,28 +42,30 @@ public class Authorization extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
    
         HttpSession session = request.getSession();
+        String page = "/RequestFriends";
+        
         String code = (String) session.getAttribute("code");
         if(code == null) {
-            String page = "/index.html";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-            dispatcher.forward(request,response);
-            return;
+            String access_token = (String) session.getAttribute("access_token");
+            if(access_token == null) {
+                page = "/index.html";
+            } else {         
+                Integer user_id = (Integer) session.getAttribute("user_id");
+                
+                UserActor userAccount = getUserAccount(user_id, access_token);
+                session.setAttribute("userAccount", userAccount);
+            }
+        } else {
+            UserActor userAccount = getUserAccount(session, code);
+            session.setAttribute("userAccount", userAccount);
         }
-        
-        UserActor userAccount = getUserAccount(code);
 
-        if(userAccount != null) {
-            session.setAttribute("Authorization", "true");
-        }
-        session.setAttribute("userAccount", userAccount);
-        
-        String page = "/RequestFriends";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request,response);
     }
 
     
-    private UserActor getUserAccount(String code){
+    private UserActor getUserAccount(HttpSession session, String code){
         TransportClient transportClient = HttpTransportClient.getInstance();
         VkApiClient vk = new VkApiClient(transportClient);
         
@@ -83,10 +85,19 @@ public class Authorization extends HttpServlet {
             return null;
         }
         
-        UserActor userAccount = new UserActor(authResponse.getUserId(),
-                authResponse.getAccessToken());
+        Integer user_id = authResponse.getUserId();
+        session.setAttribute("user_id", user_id);
+        
+        String access_token = authResponse.getAccessToken();
+        session.setAttribute("access_token", access_token);
+        
+        UserActor userAccount = getUserAccount(user_id, access_token);
         
         return userAccount;
+    }
+    
+    private UserActor getUserAccount (Integer user_id, String access_token) {
+        return new UserActor(user_id, access_token);
     }
 
 

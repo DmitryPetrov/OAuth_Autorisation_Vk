@@ -57,7 +57,6 @@ public class RequestFriendsFromVk extends HttpServlet {
             page = "/index.html";
         } else {
             getInfoFromVk(userAccount, session);    
-            page = "/show_friends";
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request,response);
